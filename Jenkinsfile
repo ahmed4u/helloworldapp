@@ -34,7 +34,7 @@ pipeline {
 			steps {
 				build job: 'Pipeline_Build_Kuberenetes_Cluster'
 				script {
-					def logContent = Jenkins.getInstance().getItemByFullName(Pipeline_Build_Kuberenetes_Cluster).getBuildByNumber(Integer.parseInt(env.BUILD_NUMBER)).logFile.text
+					def logContent = Jenkins.getInstance().getItemByFullName(env.JOB_NAME).getBuildByNumber(Integer.parseInt(env.BUILD_NUMBER)).logFile.text
 					writeFile file: "buildlog.txt", text: logContent
 				}
 			}
