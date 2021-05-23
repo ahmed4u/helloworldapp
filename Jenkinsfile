@@ -3,7 +3,8 @@ pipeline {
     environment {
         DOCKER_IMAGE_NAME = "ahmedsaleem/helloworldapp"
     }
-    stage('Build Docker Image') {
+	stages {
+		stage('Build Docker Image') {
             when {
                 branch 'master'
             }
@@ -29,4 +30,5 @@ pipeline {
                 }
             }
         }
+    }
 }
