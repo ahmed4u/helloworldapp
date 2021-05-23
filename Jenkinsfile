@@ -1,4 +1,4 @@
-pipeline {
+peline {
     agent any
     environment {
         DOCKER_IMAGE_NAME = "ahmedsaleem/helloworldapp"
@@ -33,6 +33,9 @@ pipeline {
 		stage('Building Kuberenetes Cluster') {
 			steps {
 				build job: 'Pipeline_Build_Kuberenetes_Cluster'
+				script {
+					sh 'curl "$JENKINS_HOME/jobs/Pipeline_Build_Kuberenetes_Cluster/builds/lastSuccessfulBuild/log"'
+				}
 			}
 		}
     }
