@@ -1,5 +1,5 @@
 kind: Service
-apiVersion: v1
+apiVersion: v1.14.10
 metadata:
   name: helloworld-service
 spec:
@@ -13,7 +13,7 @@ spec:
 
 ---
 
-apiVersion: apps/v1
+apiVersion: apps/v1.14.10
 kind: Deployment
 metadata:
   name: helloworld-deployment
