@@ -39,10 +39,14 @@ pipeline {
 			when {
                 branch 'master'
             }
-			kubernetesDeploy {
-				kubeconfigId: kubeconfig
-				configs: 'helloworld-kube.yml'
-				enableConfigSubstitution: true
+			steps {
+				input 'Deploy Hello World App'
+				milestone(1)
+				kubernetesDeploy {
+					kubeconfigId: kubeconfig
+					configs: 'helloworld-kube.yml'
+					enableConfigSubstitution: true
+				}
 			}
 		}
 			
