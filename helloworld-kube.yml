@@ -13,8 +13,8 @@ spec:
 
 ---
 
+apiVersion: extentions/v1beta1
 kind: Deployment
-apiVersion: v1
 metadata:
   name: helloworld-deployment
   labels:
@@ -24,7 +24,6 @@ spec:
   selector:
     matchLabels:
       app: helloworld
-      track: stable
   template:
     metadata:
       labels:
