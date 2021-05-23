@@ -39,12 +39,10 @@ pipeline {
 			when {
                 branch 'master'
             }
-			steps {
-				kubernetesDeploy {
-					kubeconfigId: kubeconfig
-					configs: 'helloworld-kube.yml'
-					enableConfigSubstitution: true
-				}
+			kubernetesDeploy {
+				kubeconfigId: kubeconfig
+				configs: 'helloworld-kube.yml'
+				enableConfigSubstitution: true
 			}
 		}
 			
