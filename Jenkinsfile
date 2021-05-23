@@ -30,14 +30,27 @@ pipeline {
                 }
             }
         }
-		stage('Building Kuberenetes Cluster') {
+        stage('Building Kuberenetes Cluster') {
+            steps {
+                build job: 'Pipeline_Build_Kuberenetes_Cluster'
+                    script {
+                        def logContent = Jenkins.getInstance().getItemByFullName(env.JOB_NAME).getBuildByNumber(Integer.parseInt(env.BUILD_NUMBER)).logFile.text
+                        writeFile file: "buildlog.txt", text: logContent
+                    }
+            }
+        }
+		stage('Deploy HelloWorld App') {
+			when {
+                branch 'master'
+            }
 			steps {
-				build job: 'Pipeline_Build_Kuberenetes_Cluster'
-				script {
-					def logContent = Jenkins.getInstance().getItemByFullName(env.JOB_NAME).getBuildByNumber(Integer.parseInt(env.BUILD_NUMBER)).logFile.text
-					writeFile file: "buildlog.txt", text: logContent
+				kubernetesDeploy {
+					kubeconfigId: kubeconfig
+					configs: 'helloworld-kube.yml'
+					enableConfigSubstitution: true
 				}
 			}
 		}
+			
     }
 }
