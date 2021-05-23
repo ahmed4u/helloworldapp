@@ -39,8 +39,8 @@ spec {
 
 spec {
 container {
-image = "nginxdemos:latest"
-name = "hello-world"
+image = "ghost:alpine"
+name = "ghost:alpine"
 port {
  container_port = "2368"
 }
