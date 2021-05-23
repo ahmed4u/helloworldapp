@@ -45,22 +45,29 @@ pipeline {
 		}	
 				
 		stage('Terraform Init') {
-            sh label: 'terraform init', script: "/tmp/terraform init -backend-config \"bucket=shifa4u-testbucket\""
-        }
+			steps {
+				script {
+					sh label: 'terraform init', script: "/tmp/terraform init -backend-config \"bucket=shifa4u-testbucket\""
+				}
+			}
+		}
 		
         stage('Terrafrom Plan') {
-        sh label: 'terraform plan', script: "/tmp/terraform plan -out=tfplan -input=false"
-            script {
-                timeout(time: 10, unit: 'MINUTES') {
+			steps {
+				script {
+					sh label: 'terraform plan', script: "/tmp/terraform plan -out=tfplan -input=false"
+                    timeout(time: 10, unit: 'MINUTES') {
                     input(id: "Deploy Gate", message: "Deploy Kubernets environment?", ok: 'Deploy')
-                }
-            }
+					}
+				}
+			}
 		}
 				
 		stage('Terraform Apply') {
-            sh label: 'terraform apply', script: "terraform apply -lock=false -input=false tfplan"
-        }
-				
-	}	
-				
+			steps {
+				script {
+				    sh label: 'terraform apply', script: "terraform apply -lock=false -input=false tfplan"
+				}
+			}
+		}
 }
