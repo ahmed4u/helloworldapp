@@ -1,51 +1,38 @@
-resource "kubernetes_service" "ghost_service" {
-metadata {
-name = "ghost-service"
-}
+kind: Service
+apiVersion: v1
+metadata:
+  name: helloworld-service
+spec:
+  type: NodePort
+  selector:
+    app: helloworld
+  ports:
+  - protocol: TCP
+    port: 3333
+    nodePort: 30011
 
-spec {
+---
 
-  selector = {
-    app = "${kubernetes_deployment.ghost_deployment.spec.0.template.0.metadata.0.labels.app}"
-  }
-  port {
-    port = "2368"
-    target_port = "2368"
-    node_port = "30011"
-  }
-
-  type = "NodePort"
- }
-}
-
-resource "kubernetes_deployment" "ghost_deployment" {
-metadata {
- name = "ghost-blog"
-}
-spec {
-  replicas = "1"
-
-  selector {
-    match_labels = {
-      app = "ghost-blog"
-  }
-}
-  template {
-    metadata {
-      labels = {
-        app = "ghost-blog"
-      }
-   }
-
-spec {
-container {
-image = "ghost:alpine"
-name = "ghost:alpine"
-port {
- container_port = "2368"
-}
-}
-}
-}
-}
-}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: helloworld-deployment
+  labels:
+    app: helloworld
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: helloworld
+      track: stable
+  template:
+    metadata:
+      labels:
+        app: helloworld
+        track: stable
+    spec:
+      containers:
+      - name: helloworld
+        image: $DOCKER_IMAGE_NAME:$BUILD_NUMBER
+        ports:
+        - containerPort: 3333
