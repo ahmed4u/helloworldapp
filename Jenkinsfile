@@ -40,13 +40,11 @@ pipeline {
                 branch 'master'
             }
 			steps {
-				input 'Deploy Hello World App'
-				milestone(1)
-				kubernetesDeploy {
-					kubeconfigId: kubeconfig
-					configs: 'helloworld-kube.yml'
+				kubernetesDeploy(
+					kubeconfigId: kubeconfig,
+					configs: 'helloworld-kube.yml',
 					enableConfigSubstitution: true
-				}
+				)
 			}
 		}
 			
