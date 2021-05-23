@@ -1,5 +1,5 @@
 kind: Service
-apiVersion: v2beta2
+apiVersion: v2
 metadata:
   name: helloworld-service
 spec:
@@ -14,7 +14,7 @@ spec:
 ---
 
 kind: Deployment
-apiVersion: apps/v2beta2
+apiVersion: apps/v2
 metadata:
   name: helloworld-deployment
   labels:
