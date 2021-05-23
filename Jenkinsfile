@@ -31,7 +31,9 @@ pipeline {
             }
         }
 		stage('Building Kuberenetes Cluster') {
-			build job: 'Pipeline_Build_Kuberenetes_Cluster'
+			steps {
+				build job: 'Pipeline_Build_Kuberenetes_Cluster'
+			}
 		}
     }
 }
