@@ -32,7 +32,9 @@ pipeline {
         }
         stage('Building Kuberenetes Cluster') {
             steps {
-                build job: 'Pipeline_Build_Kuberenetes_Cluster'
+                build job: 'Pipeline_Build_Kuberenetes_Cluster', parameters: [
+					string(name: 'Terraform_Action', value: "Deploy")
+				]
             }
         }
 		stage('Deploy HelloWorld App') {
