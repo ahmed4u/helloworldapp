@@ -2,13 +2,14 @@ pipeline {
     agent any
     environment {
         DOCKER_IMAGE_NAME = "ahmedsaleem/helloworldapp"
-    }
-	withCredentials([[
+		withCredentials([[
                 $class: 'AmazonWebServicesCredentialsBinding',
                 credentialsId: 'shifa4u_credentials',
                 accessKeyVariable: 'AWS_ACCESS_KEY_ID',
                 secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
-            ]]){
+            ]])
+    }
+	
 			stages {
 			
 				stage('Build Docker Image') {
@@ -57,5 +58,4 @@ pipeline {
 				
 			}	
 				
-        }
     }
