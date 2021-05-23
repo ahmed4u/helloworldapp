@@ -1,3 +1,4 @@
+
 pipeline {
     agent any
     environment {
@@ -33,22 +34,22 @@ pipeline {
         stage('Building Kuberenetes Cluster') {
             steps {
                 build job: 'Pipeline_Build_Kuberenetes_Cluster', parameters: [
-					string(name: 'Terraform_Action', value: "Deploy")
-				]
+                                        string(name: 'Terraform_Action', value: "Deploy")
+                                ]
             }
         }
-		stage('Deploy HelloWorld App') {
-			when {
+                stage('Deploy HelloWorld App') {
+                        when {
                 branch 'master'
             }
-			steps {
-				kubernetesDeploy(
-					kubeconfigId: kubeconfig,
-					configs: 'helloworld-kube.yml',
-					enableConfigSubstitution: true
-				)
-			}
-		}
-			
+                        steps {
+                                kubernetesDeploy(
+                                        kubeconfigId: 'kubeconfig',
+                                        configs: 'helloworld-kube.yml',
+                                        enableConfigSubstitution: true
+                                )
+                        }
+                }
+
     }
 }
