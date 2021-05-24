@@ -36,3 +36,10 @@ spec:
         image: ahmedsaleem/helloworldapp:latest
         ports:
         - containerPort: 3333
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 3333
+          initialDelaySeconds: 15
+          timeoutSeconds: 1
+          periodSeconds: 10
