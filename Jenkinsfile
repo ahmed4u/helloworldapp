@@ -1,4 +1,3 @@
-
 pipeline {
     agent any
     environment {
@@ -38,18 +37,12 @@ pipeline {
                                 ]
             }
         }
-                stage('Deploy HelloWorld App') {
-                        when {
-                branch 'master'
-            }
-                        steps {
-                                kubernetesDeploy(
-                                        kubeconfigId: 'kubeconfig',
-                                        configs: 'helloworld-kube.yml',
-                                        enableConfigSubstitution: true
-                                )
-                        }
+        stage('Deploy HelloWorld App') {
+            steps {
+				script {
+					sh "kubectl --kubeconfig $JENKINS_HOME/kubeconfig_file create -f helloworld-kube.yml"
+                    }
                 }
-
+		}	
     }
 }
