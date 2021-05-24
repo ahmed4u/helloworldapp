@@ -1,18 +1,3 @@
-kind: Service
-apiVersion: v1
-metadata:
-  name: helloworld-service
-spec:
-  type: NodePort
-  selector:
-    app: helloworld
-  ports:
-  - protocol: TCP
-    port: 3333
-    nodePort: 30011
-
----
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
