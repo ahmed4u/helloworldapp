@@ -171,3 +171,13 @@ Where `X` is an index starting at 0.
 ## Network submodule
 
 By default, the kubeadm module creates the cluster in the [default VPC](https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html) of the specified AWS region.
+
+# TWO Jenkins Pipelines used to build the helloworldapp
+
+
+-- Pipeline_Build_Kuberenetes_Cluster - To build the Kube Cluster
+-- Pipeline_HelloWorldApp             - To create helloworld web ap using Docker file and K8s container
+
+# Process
+
+Build Docker Image --> Push Docker Image --> Build KUBE Cluster --> Deploy Web App called 'HelloWorldApp'
