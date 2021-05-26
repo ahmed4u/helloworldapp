@@ -8,6 +8,8 @@ Terraform module for bootstrapping a Kubernetes cluster with kubeadm on AWS.
 - [**Quick start**](#quick-start)
 - [**Prerequisites**](#prerequisites)
 - [**AWS resources**](#aws-resources)
+- [**Jenkins**](#jenkins)
+- [**Process**](#process)
 
 ## Description
 
@@ -172,7 +174,9 @@ Where `X` is an index starting at 0.
 
 By default, the kubeadm module creates the cluster in the [default VPC](https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html) of the specified AWS region.
 
-# TWO Jenkins Pipelines used to build the helloworldapp
+## Jenkins
+
+Two Jenkins piplines used to build the helloworld app
 
 
 -- Pipeline_Build_Kuberenetes_Cluster - To build the Kube Cluster
